@@ -1,0 +1,14 @@
+CREATE TABLE users (
+id SERIAL PRIMARY KEY,
+username VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE tasks (
+id SERIAL PRIMARY KEY,
+title VARCHAR(255) NOT NULL,
+description TEXT,
+completed BOOLEAN DEFAULT false,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+user_id INT, FOREIGN KEY (user_id) REFERENCES users(id));
