@@ -35,7 +35,7 @@ app.get('/api/:endpoint', async (req, res, next) => {
                 query = `Select id, username FROM ${endpoint}`;
                 break;
             case 'tasks':
-                query = `SELECT * FROM ${endpoint}`;
+                query = `SELECT title, description, completed, created_at FROM ${endpoint}`;
                 break;
             default:
                 res.status(404).send('NOT FOUND 🙃');
@@ -59,7 +59,7 @@ app.get('/api/:endpoint/:id', async (req, res, next) =>{
         let values;
         switch (endpoint) {
             case 'users':
-                query = `SELECT users.id, users.username, tasks.*
+                query = `SELECT users.id, users.username, tasks.title, tasks.description, tasks.completed, tasks.created_at
                 FROM users
                 LEFT JOIN tasks ON users.id = tasks.user_id
                 WHERE users.id = $1`;
@@ -108,13 +108,75 @@ app.post('/api/:endpoint', async (req, res, next) => {
                 return;
         }
         const result = await pool.query(query, values);
+        res.status(201).json(result.rows);
+    } catch (err) {
+        next(err)
+    }
+})
+
+//Update route
+app.put('/api/:endpoint/:id', async (req, res, next) => {
+    try {
+        const { id, endpoint } = req.params;
+        const { username, password, email, title, description } = req.body;
+        
+        let query;
+        let values;
+        switch (endpoint) {
+            case 'users':
+                query=`UPDATE ${endpoint} SET username = $1 WHERE id = $2 RETURNING id, username`;
+                values = [username, id];
+                break;
+            case 'tasks':
+                query=`UPDATE ${endpoint} SET title = $1, description = $2 WHERE id = $3 RETURNING *`;
+                values = [title, description, id];
+                break;
+            default:
+                res.status(404).send('NOT FOUND 🙃');
+                return;       
+        }
+        const result = await pool.query(query, values);
+        if (result.rows.length === 0) {
+            errorMessage()
+        }
         res.status(200).json(result.rows);
     } catch (err) {
         next(err)
     }
 })
 
+//delete route 
+app.delete('/api/:endpoint/:id', async (req, res, next) => {
+    try {
+        const { id, endpoint } = req.params;
 
+        let query;
+        let successMessage;
+        switch (endpoint) {
+            case 'users':
+                query=`DELETE from ${endpoint} WHERE id = $1 RETURNING id, username, email`;
+                successMessage = `${endpoint} has been succesfully deleted.`
+                break;
+            case 'tasks':
+                query=`DELETE from ${endpoint} WHERE id = $1 RETURNING *`;
+                successMessage = `${endpoint} has been succesfully deleted.`
+                break;
+            default:
+                res.status(404).send('NOT FOUND 🙃');
+                return;
+        }
+        const result = await pool.query(query, [id]);
+        if (result.rows.length === 0) {
+            errorMessage()
+        }
+        res.status(204).json({
+            message: successMessage,
+            data: result.rows
+        });
+    } catch(err) {
+        next(err)
+    }
+})
 
 app.use((req,res,next) => {
     const err = new Error('NOT FOUND ☹️');
@@ -123,7 +185,11 @@ app.use((req,res,next) => {
 })
 
 app.use((err, req, res, next) => {
-    res.status(err.status).json({error: err.message});
+    console.error(err.stack)
+
+    const statusCode = err.status || 500;
+    const errorMessage = statusCode === 500 ? 'Internal Server Error' : err.message;
+    res.status(statusCode).json({error: errorMessage});
 })
 
 app.listen(PORT, (req, res) => {
