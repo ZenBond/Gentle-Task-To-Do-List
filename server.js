@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const {Pool} = require('pg');
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 3000;
 const dotenv = require('dotenv');
@@ -13,6 +14,7 @@ const pool = new Pool({
 
 app.use((express.static("public")))
 app.use(express.json());
+app.use(cors());
 
 // //hash password middleware
 // app.use(async (req, res, next) => {
