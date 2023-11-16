@@ -14,14 +14,16 @@ const pool = new Pool({
 app.use((express.static("public")))
 app.use(express.json());
 
-//hash password middleware
-app.use(async (req, res, next) => {
-    if (req.body.password) {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        req.body.password = hashedPassword;
-    }
-    next();
-})
+// //hash password middleware
+// app.use(async (req, res, next) => {
+//     if (req.body.password) {
+//         const hashedPassword = await bcrypt.hash(req.body.password, 10);
+//         req.body.password = hashedPassword;
+//     }
+//     next();
+// })
+
+
 
 //get all route
 app.get('/api/:endpoint', async (req, res, next) => {

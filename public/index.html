@@ -3,11 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>To Do List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <h1>Test</h1>
+    <h1>Todo List</h1>
+
+    <div id="todo-form" style="background-color: aqua">
+      <input type="text" id="todo-input" placeholder="Enter your task" />
+      <input type="text" id="description" placeholder="Enter description" />
+      <input type="text" id="user-id" placeholder="Enter id" />
+      <button id="add-button">Add Task</button>
+    </div>
+
+    <ul id="todo-list"></ul>
     <script src="main.js"></script>
   </body>
 </html>
