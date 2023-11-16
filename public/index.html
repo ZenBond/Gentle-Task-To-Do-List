@@ -11,14 +11,20 @@
   <body>
     <h1>Todo List</h1>
 
-    <div id="todo-form" style="background-color: aqua">
-      <input type="text" id="todo-input" placeholder="Enter your task" />
-      <input type="text" id="description" placeholder="Enter description" />
-      <input type="text" id="user-id" placeholder="Enter id" />
-      <button id="add-button">Add Task</button>
+    <div id="login-popup">
+      <label for="username">Username</label>
+      <input type="text" id="username" />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" />
+
+      <button id="login-button">login</button>
     </div>
 
-    <ul id="todo-list"></ul>
+    <div id="task-container">
+      <ul id="task-list"></ul>
+      <button id="add-task">Add Task</button>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>

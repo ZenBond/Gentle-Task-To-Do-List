@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+
 const {Pool} = require('pg');
 const express = require('express');
 const cors = require('cors')
@@ -16,14 +16,6 @@ app.use((express.static("public")))
 app.use(express.json());
 app.use(cors());
 
-// //hash password middleware
-// app.use(async (req, res, next) => {
-//     if (req.body.password) {
-//         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-//         req.body.password = hashedPassword;
-//     }
-//     next();
-// })
 
 
 
@@ -107,16 +99,36 @@ app.post('/api/:endpoint', async (req, res, next) => {
                 query=`INSERT INTO tasks (title, description, user_id) VALUES ($1, $2, $3) RETURNING *`;
                 values=[title, description, user_id]
                 break;
+            case 'login':
+                query=`SELECT id, username, password FROM users WHERE username = $1`;
+                values=[username]
+                break;
             default:
                 res.status(404).send('NOT FOUND 🙃');
                 return;
         }
         const result = await pool.query(query, values);
+
+        if (endpoint === 'login') {
+            if (result.rows.length === 0) {
+                return res.status(401).json({ error: 'Could not find user' });
+            }
+
+            const user = result.rows[0];
+
+            if (password === user.password) {
+                return res.status(200).json({ message: 'Login successful', data: result.rows });
+            } else {
+                return res.status(401).json({ error: 'Invalid username or password' });
+            }
+        }
+        
         res.status(201).json(result.rows);
     } catch (err) {
         next(err)
     }
 })
+
 
 //Update route
 app.put('/api/:endpoint/:id', async (req, res, next) => {
@@ -173,7 +185,7 @@ app.delete('/api/:endpoint/:id', async (req, res, next) => {
         if (result.rows.length === 0) {
             errorMessage()
         }
-        res.status(204).json({
+        res.status(200).json({
             message: successMessage,
             data: result.rows
         });
