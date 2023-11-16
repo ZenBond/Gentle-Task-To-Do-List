@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <h1>Todo List</h1>
+    <header>
+      <h1>Todo List</h1>
+      <div id="username-display"></div>
+    </header>
 
     <div id="login-popup">
       <label for="username">Username</label>
@@ -23,6 +26,12 @@
 
     <div id="task-container">
       <ul id="task-list"></ul>
+      <input type="text" id="task-input" placeholder="Enter a task" />
+      <input
+        type="textarea"
+        id="description-input"
+        placeholder="Enter a description (optional)"
+      />
       <button id="add-task">Add Task</button>
     </div>
     <script src="main.js"></script>

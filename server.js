@@ -31,7 +31,7 @@ app.get('/api/:endpoint', async (req, res, next) => {
                 query = `Select id, username FROM ${endpoint}`;
                 break;
             case 'tasks':
-                query = `SELECT title, description, completed, created_at FROM ${endpoint}`;
+                query = `SELECT * FROM ${endpoint}`;
                 break;
             default:
                 res.status(404).send('NOT FOUND 🙃');
@@ -55,7 +55,7 @@ app.get('/api/:endpoint/:id', async (req, res, next) =>{
         let values;
         switch (endpoint) {
             case 'users':
-                query = `SELECT users.id, users.username, tasks.title, tasks.description, tasks.completed, tasks.created_at
+                query = `SELECT users.id, users.username, tasks.*
                 FROM users
                 LEFT JOIN tasks ON users.id = tasks.user_id
                 WHERE users.id = $1`;
