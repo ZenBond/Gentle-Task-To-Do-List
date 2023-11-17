@@ -73,9 +73,6 @@ app.get('/api/:endpoint/:id', async (req, res, next) =>{
                 return;
         }
         const result = await pool.query(query, values);
-        if (result.rows.length === 0) {
-            errorMessage()
-        }
         res.status(200).send(result.rows);
     } catch(err) {
         next(err)
@@ -92,8 +89,8 @@ app.post('/api/:endpoint', async (req, res, next) => {
         let values;
         switch(endpoint) {
             case 'users':
-                query=`INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING id, username`;
-                values=[username, email, password]
+                query=`INSERT INTO users (username, password) VALUES($1, $2) RETURNING id, username`;
+                values=[username, password]
                 break;
             case 'tasks':
                 query=`INSERT INTO tasks (title, description, user_id) VALUES ($1, $2, $3) RETURNING *`;
@@ -116,8 +113,8 @@ app.post('/api/:endpoint', async (req, res, next) => {
 
             const user = result.rows[0];
 
-            if (password === user.password) {
-                return res.status(200).json({ message: 'Login successful', data: result.rows });
+        if (password === user.password) {
+                return res.status(200).json({ loginMessage: 'Login successful', registerMessage: 'Account Created Succesfully 🎉', data: result.rows });
             } else {
                 return res.status(401).json({ error: 'Invalid username or password' });
             }
