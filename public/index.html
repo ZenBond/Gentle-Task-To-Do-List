@@ -7,34 +7,47 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Oxygen&family=Permanent+Marker&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header>
-      <h1>Todo List</h1>
-      <div id="username-display"></div>
-    </header>
-
-    <div id="login-popup">
-      <label for="username">Username</label>
-      <input type="text" id="username" />
-
-      <label for="password">Password</label>
-      <input type="password" id="password" />
-
-      <button id="login-button">login</button>
-      <button id="register-button">register</button>
-    </div>
-
-    <div id="task-container">
-      <ul id="task-list"></ul>
-      <input type="text" id="task-input" placeholder="Enter a task" />
-      <input
-        type="textarea"
-        id="description-input"
-        placeholder="Enter a description (optional)"
-      />
-      <button id="add-task">Add Task</button>
-    </div>
+    <div id="threejs-container"></div>
+    <div id="html-container">
+      <header>
+        <div id="username-display"></div>
+      </header>
+      <main>
+        <div id="intro">
+          <h1>This is Gentle Task</h1>
+          <p>A minimalistic ToDo list to order the chaos.</p>
+          <button id="start-button">Get Started</button>
+        </div>
+        <div id="login-popup">
+          <label for="username">Username</label>
+          <input type="text" id="username" />
+  
+          <label for="password">Password</label>
+          <input type="password" id="password" />
+  
+          <button id="login-button">login</button>
+          <button id="register-button">register</button>
+        </div>
+  
+        <div id="task-container">
+          <ul id="task-list"></ul>
+          <input type="text" id="task-input" placeholder="Enter a task" />
+          <input
+            type="textarea"
+            id="description-input"
+            placeholder="Enter a description (optional)"
+          />
+          <button id="add-task">Add Task</button>
+        </div>
+      </div>
+    </main>
     <script src="main.js"></script>
+    <script src="three.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   </body>
 </html>

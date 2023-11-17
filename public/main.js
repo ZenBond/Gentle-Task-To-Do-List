@@ -7,10 +7,19 @@ const registerButton = document.querySelector('#register-button')
 const usernameDisplay = document.querySelector('#username-display')
 const taskInput = document.querySelector('#task-input')
 const descriptionInput = document.querySelector('#description-input')
+const startBtn = document.querySelector('#start-button')
 let userId;
 
 
 hideTasks()
+
+startBtn.addEventListener('click', () => {
+    if (startBtn.style.display === 'none') {
+        startBtn.style.display = 'block'
+    }
+    showLoginPopup()
+    startBtn.style.display = 'none'
+})
 
 
 //hide and display functions for todolists
