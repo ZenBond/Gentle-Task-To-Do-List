@@ -8,6 +8,7 @@ const usernameDisplay = document.querySelector('#username-display')
 const taskInput = document.querySelector('#task-input')
 const descriptionInput = document.querySelector('#description-input')
 const startBtn = document.querySelector('#start-button')
+const introContainer = document.querySelector('#intro')
 let userId;
 
 
@@ -17,8 +18,12 @@ startBtn.addEventListener('click', () => {
     if (startBtn.style.display === 'none') {
         startBtn.style.display = 'block'
     }
+    if (introContainer.style.display === 'none') {
+        introContainer.style.display === 'block'
+    }
     showLoginPopup()
-    startBtn.style.display = 'none'
+    startBtn.style.display = 'none';
+    introContainer.style.display = 'none';
 })
 
 
@@ -109,7 +114,7 @@ function buildTaskTable(userTasks) {
         return;
     }
 
-    const headers = ['Title', 'Description', 'Date Created', 'Status'];
+    const headers = ['Title', 'Description', 'Date Created', 'Status', 'Edit', 'Delete'];
     const table = createTableWithHeaders(headers);
     
     userTasks.forEach(task => {
@@ -130,19 +135,20 @@ function buildTaskTable(userTasks) {
         checkbox.type = 'checkbox';
         checkbox.addEventListener('change', () => {
             if (checkbox.checked) {
-                statusSpan.textContent = "Complete"
+                statusSpan.textContent = "✅"
             } else {
-                statusSpan.textContent = "Not Complete"
+                statusSpan.textContent = "❌"
             }
         })
         const statusSpan = document.createElement('span');
-        statusSpan.textContent = task.completed ? "Complete" : "Not Complete";
+        statusSpan.textContent = task.completed ? "✅" : "❌";
         statusCell.append(checkbox, statusSpan);
         row.append(statusCell);
         table.append(row)
 
         const editCell = document.createElement('td');
         const editButton = document.createElement('button');
+        editButton.classList.add('edit-button')
         editButton.textContent = 'Edit';
         editButton.addEventListener('click', () => {
             const titleInput = document.createElement('input');
@@ -171,6 +177,7 @@ function buildTaskTable(userTasks) {
 
         const deleteCell = document.createElement('td');
         const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-btn')
         deleteButton.textContent = 'Delete';
         deleteButton.addEventListener('click', () => {
             deleteUserTasks(taskId, table, row)

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Oxygen&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="threejs-container"></div>
@@ -36,13 +36,15 @@
   
         <div id="task-container">
           <ul id="task-list"></ul>
-          <input type="text" id="task-input" placeholder="Enter a task" />
-          <input
-            type="textarea"
-            id="description-input"
-            placeholder="Enter a description (optional)"
-          />
-          <button id="add-task">Add Task</button>
+          <div id="input-container">
+            <input type="text" id="task-input" placeholder="Enter a task" />
+            <input
+              type="textarea"
+              id="description-input"
+              placeholder="Enter a description (optional)"
+            />
+            <button id="add-task">Add Task</button>
+          </div>
         </div>
       </div>
     </main>
