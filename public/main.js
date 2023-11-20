@@ -9,6 +9,9 @@ const taskInput = document.querySelector('#task-input')
 const descriptionInput = document.querySelector('#description-input')
 const startBtn = document.querySelector('#start-button')
 const introContainer = document.querySelector('#intro')
+const musicPlayer = document.querySelector('#music')
+const audio = document.querySelector('#audio')
+const musicImg = document.querySelector('#music-img')
 let userId;
 
 
@@ -48,6 +51,16 @@ function hideTasks() {
 
 }
 
+function openCustomModal(message) {
+    $('#customModalBody').text(message);
+    $('#customModal').css('display', 'block');
+}
+
+function closeCustomModal() {
+    $('#customModal').css('display', 'none');
+    showTasks()
+}
+
 //Authenticates user login and generates table off of user data.
 loginButton.addEventListener('click', async () => {
     const username = $('#username').val()
@@ -59,11 +72,10 @@ loginButton.addEventListener('click', async () => {
         contentType: 'application/json',
         data: JSON.stringify({username, password}),
         success: function(loginData) {
-            alert(loginData.loginMessage);
+            openCustomModal(loginData.loginMessage)
             hideLoginPopup();
-            showTasks();
             userId = loginData.data[0].id
-            usernameDisplay.textContent = `User: ${loginData.data[0].username}`
+            usernameDisplay.textContent = `${loginData.data[0].username}'s Todo List`
             getUserTasks(userId)
         },
     })
@@ -90,11 +102,10 @@ registerButton.addEventListener('click', async () => {
                     data: JSON.stringify({ username, password }),
                 })
             ).then(function (loginData) {
-                alert(loginData.registerMessage);
+                openCustomModal(loginData.registerMessage);
                 hideLoginPopup();
-                showTasks();
                 userId = loginData.data[0].id;
-                usernameDisplay.textContent = `User: ${loginData.data[0].username}`;
+                usernameDisplay.textContent = `${loginData.data[0].username}'s Todo List`;
             });
         },
     });
@@ -201,6 +212,9 @@ addTaskBtn.addEventListener('click', () => {
         user_id: userId
     }
     createTask(data);
+
+    taskInput.value = '';
+    descriptionInput.value = '';
 })
 
 //time conversion
@@ -275,3 +289,12 @@ function createTableWithHeaders(headers) {
     return table;
 }
 
+musicPlayer.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        musicImg.src = 'music1.png'
+    } else {
+        audio.pause();
+        musicImg.src = 'music.png'
+    }
+});

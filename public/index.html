@@ -17,6 +17,10 @@
       <header>
         <div id="username-display"></div>
       </header>
+      <div id="music">
+        <img src="music.png" alt="" id="music-img">
+        <audio id="audio" src="JD.mp3" loop></audio>
+      </div>
       <main>
         <div id="intro">
           <h1>This is Gentle Task</h1>
@@ -32,6 +36,13 @@
   
           <button id="login-button">login</button>
           <button id="register-button">register</button>
+        </div>
+
+        <div id="customModal" class="custom-modal">
+          <div class="custom-modal-content">
+            <span class="custom-modal-close" onclick="closeCustomModal()">&times;</span>
+            <div id="customModalBody"></div>
+          </div>
         </div>
   
         <div id="task-container">

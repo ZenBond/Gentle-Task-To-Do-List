@@ -4,6 +4,28 @@ body {
     font-family: 'Marcellus', sans-serif;
 }
 
+#username-display {
+    text-align: left;
+    color: #4e6260;
+}
+
+#music {
+    background-color: transparent;
+    border-radius: 30px;
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    right: 219px;
+    bottom: 328px;
+    cursor: pointer;
+}
+
+#music-img {
+    height: 14px;
+    margin-top: 4px;
+    margin-left: 5px;
+}
+
 
 main {
     display: flex;
@@ -73,6 +95,12 @@ button {
     border-radius: 8px;
     color: #dee2e6;
     background-color: #4e6260;
+    transition: background-color .2s;
+}
+
+button:hover {
+    background-color: #6a8683;
+    box-shadow: inset 2px 2px 5px grey;
 }
 
 .delete-btn, .edit-button {
@@ -136,6 +164,41 @@ input[type="checkbox"]:checked {
 td, th {
     text-align: center;
 }
+
+
+.custom-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    color: #4e6260;
+  }
+  
+  .custom-modal-content {
+    margin: 15% auto;
+    width: 80%;
+  }
+  
+  .custom-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .custom-modal-close:hover,
+  .custom-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
 
 
 @media (max-width: 768px) {
