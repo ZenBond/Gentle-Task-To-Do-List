@@ -24,6 +24,9 @@ body {
     height: 14px;
     margin-top: 4px;
     margin-left: 5px;
+    position: fixed;
+    right: 200px;
+    top: 465px;
 }
 
 
@@ -201,9 +204,3 @@ td, th {
   
 
 
-@media (max-width: 768px) {
-    table {
-        display: block;
-        overflow-x: auto;
-    }
-}
