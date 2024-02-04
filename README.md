@@ -3,6 +3,7 @@
 # Overview- Gentle Task To-Do List 
 
 • Tech used: 
+
 -HTML, CSS, Express, Node.js, Postgres
 
 -Libraries: Three.js, PG, CORS 
