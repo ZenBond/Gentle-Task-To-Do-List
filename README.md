@@ -10,14 +10,19 @@
 
 -Hosting: Render
 
-# App Info/Features
-• Allows the user to add, edit, delete, and get all tasks.
+# Overview
 
-• Rest API created using Postgresql and express.
+• The Gentle Task To-Do List is a versatile task management application built to streamline productivity and organization. Leveraging a tech stack comprised of HTML, CSS, Express, Node.js, and PostgreSQL, along with additional libraries like Three.js for immersive design elements, the app offers users a seamless and intuitive task management experience.
 
-• Users can login to view previous tasks.
+# Features
 
-• Design was made using DOM and three.js library.
+• Task Management: Users can add, edit, delete, and view all tasks within the application, providing a flexible platform to organize their daily activities.
+
+• REST API Integration: The application utilizes a RESTful API created with PostgreSQL and Express, ensuring efficient data communication and seamless interaction between the front-end and back-end components.
+
+• Basic User Authentication: With user authentication functionality, individuals can securely log in to access their previous tasks, providing a personalized and convenient experience tailored to their needs.
+
+• Immersive Design: The application's design is crafted using DOM manipulation and the Three.js library, incorporating 3D visuals to enhance user engagement and enjoyment.
 
 # App Examples
 • login in page
